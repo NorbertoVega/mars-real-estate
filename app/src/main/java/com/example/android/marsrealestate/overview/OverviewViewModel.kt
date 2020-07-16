@@ -1,6 +1,5 @@
 package com.example.android.marsrealestate.overview
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,9 +17,9 @@ class OverviewViewModel : ViewModel() {
     val status: LiveData<String>
         get() = _status
 
-    private val _property = MutableLiveData<MarsProperty>()
-    val property: LiveData<MarsProperty>
-        get() = _property
+    private val _properties = MutableLiveData<List<MarsProperty>>()
+    val properties: LiveData<List<MarsProperty>>
+        get() = _properties
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -36,7 +35,7 @@ class OverviewViewModel : ViewModel() {
                 val listResult = getPropertiesDeferred.await()
                 _status.value = "Success: ${listResult.size} Mars properties retrieved"
                 if (listResult.isNotEmpty()) {
-                    _property.value = listResult[0]
+                    _properties.value = listResult
                 }
             } catch (e: Exception) {
                 _status.value = "Failure: ${e.message}"
