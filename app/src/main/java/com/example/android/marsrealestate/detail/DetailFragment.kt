@@ -1,6 +1,7 @@
 package com.example.android.marsrealestate.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,11 @@ class DetailFragment : Fragment() {
         val application = requireNotNull(activity).application
         val binding = FragmentDetailBinding.inflate(inflater)
         binding.lifecycleOwner = this
+        Log.v("Detail", "estoy aca")
+        val marsProperty = DetailFragmentArgs.fromBundle(arguments!!).selectedProperty
+        Log.v("Detail", marsProperty.imgSourceUrl)
+        val viewModelFactory = DetailViewModelFactory(marsProperty, application)
+        binding.viewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailViewModel::class.java)
         return binding.root
     }
 }
