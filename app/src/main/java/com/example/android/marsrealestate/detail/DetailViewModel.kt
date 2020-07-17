@@ -2,7 +2,6 @@ package com.example.android.marsrealestate.detail
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.android.marsrealestate.detail.DetailFragment
 import com.example.android.marsrealestate.network.MarsProperty
 import com.example.android.marsrealestate.R
 
